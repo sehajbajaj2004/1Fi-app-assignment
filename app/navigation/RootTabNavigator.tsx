@@ -65,14 +65,14 @@ export function RootTabNavigator() {
         name="Shop"
         component={ShopStackNavigator}
         options={({ route }) => {
-          // Hide the bottom tab bar on ProductDetail so it doesn't compete with
-          // the sticky CTA bar (Phase 4) — standard "focused product" pattern.
+          // Hide the bottom tab bar on ProductDetail (competes with the sticky
+          // CTA bar) and OrderConfirmation (keeps focus on the confirmation).
           const focusedRoute = getFocusedRouteNameFromRoute(route) ?? 'Shop';
+          const hideTabBar = focusedRoute === 'ProductDetail' || focusedRoute === 'OrderConfirmation';
           return {
-            tabBarStyle:
-              focusedRoute === 'ProductDetail'
-                ? { display: 'none' }
-                : { borderTopColor: colors.border, height: 60, paddingBottom: 6, paddingTop: 6 },
+            tabBarStyle: hideTabBar
+              ? { display: 'none' }
+              : { borderTopColor: colors.border, height: 60, paddingBottom: 6, paddingTop: 6 },
           };
         }}
       />
