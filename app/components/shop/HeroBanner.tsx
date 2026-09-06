@@ -3,11 +3,11 @@ import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 // Provided asset: the "Shop today, Pay later using Mutual funds." banner from the
 // live 1Fi app. This is rendered as-is — no gradient/text/illustration is recreated
-// in code. Replace this file with the real export at the same path/name.
-const HERO_BANNER = require('../../../assets/images/hero-banner.png');
+// in code.
+const HERO_BANNER = require('../../../assets/images/hero-banner.jpg');
 
-// Matches the placeholder's canvas; update if the real asset's aspect ratio differs.
-const ASSET_ASPECT_RATIO = 750 / 500;
+// Real asset's native pixel dimensions (1080x640).
+const ASSET_ASPECT_RATIO = 1080 / 640;
 
 /**
  * Thin wrapper around the provided hero banner image. Renders full-width,

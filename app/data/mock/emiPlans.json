@@ -1,0 +1,7 @@
+{
+  "tenureTemplates": [
+    { "tenureMonths": 3, "interestRatePercent": 0, "noCostEmi": true },
+    { "tenureMonths": 6, "interestRatePercent": 0, "noCostEmi": true },
+    { "tenureMonths": 12, "interestRatePercent": 8, "noCostEmi": false }
+  ]
+}

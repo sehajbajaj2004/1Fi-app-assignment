@@ -1,0 +1,116 @@
+{
+  "categories": [
+    { "id": "mobiles-laptops", "name": "Mobiles & Laptops" },
+    { "id": "two-wheelers", "name": "Two-Wheelers" },
+    { "id": "cars", "name": "Cars" }
+  ],
+  "products": [
+    {
+      "id": "p-iphone-15",
+      "categoryId": "mobiles-laptops",
+      "name": "iPhone 15",
+      "brand": "Apple",
+      "icon": "phone-portrait-outline",
+      "description": "6.1-inch Super Retina XDR display, A16 Bionic chip, 48MP main camera with 2x optical-quality zoom, and USB-C.",
+      "shortSpec": "128GB, Black",
+      "variants": [
+        { "id": "v-iphone15-128-black", "label": "128GB · Black", "price": 79900, "inStock": true },
+        { "id": "v-iphone15-256-blue", "label": "256GB · Blue", "price": 89900, "inStock": true },
+        { "id": "v-iphone15-512-titanium", "label": "512GB · Titanium", "price": 109900, "inStock": false }
+      ]
+    },
+    {
+      "id": "p-galaxy-s24",
+      "categoryId": "mobiles-laptops",
+      "name": "Galaxy S24",
+      "brand": "Samsung",
+      "icon": "phone-portrait-outline",
+      "description": "6.2-inch Dynamic AMOLED 2X, Snapdragon 8 Gen 3, Galaxy AI features, and a 50MP triple camera system.",
+      "shortSpec": "128GB, Onyx Black",
+      "variants": [
+        { "id": "v-s24-128-onyx", "label": "128GB · Onyx Black", "price": 74999, "inStock": true },
+        { "id": "v-s24-256-marble", "label": "256GB · Marble Gray", "price": 79999, "inStock": true }
+      ]
+    },
+    {
+      "id": "p-macbook-air-m3",
+      "categoryId": "mobiles-laptops",
+      "name": "MacBook Air M3",
+      "brand": "Apple",
+      "icon": "laptop-outline",
+      "description": "13-inch Liquid Retina display, Apple M3 chip with 8-core CPU, up to 18 hours of battery life.",
+      "shortSpec": "8GB/256GB, Silver",
+      "variants": [
+        { "id": "v-mba-8-256-silver", "label": "8GB/256GB · Silver", "price": 114900, "inStock": true },
+        { "id": "v-mba-16-512-midnight", "label": "16GB/512GB · Midnight", "price": 144900, "inStock": true }
+      ]
+    },
+    {
+      "id": "p-dell-xps-13",
+      "categoryId": "mobiles-laptops",
+      "name": "Dell XPS 13",
+      "brand": "Dell",
+      "icon": "laptop-outline",
+      "description": "13.4-inch InfinityEdge display, Intel Core Ultra processors, and a compact CNC-machined aluminum chassis.",
+      "shortSpec": "i5, 16GB/512GB",
+      "variants": [
+        { "id": "v-xps13-i5-512", "label": "Core Ultra 5 · 16GB/512GB", "price": 119990, "inStock": true },
+        { "id": "v-xps13-i7-1tb", "label": "Core Ultra 7 · 32GB/1TB", "price": 159990, "inStock": true }
+      ]
+    },
+    {
+      "id": "p-re-classic-350",
+      "categoryId": "two-wheelers",
+      "name": "Classic 350",
+      "brand": "Royal Enfield",
+      "icon": "bicycle-outline",
+      "description": "Retro-styled 349cc single-cylinder motorcycle with a J-platform chassis and dual-channel ABS.",
+      "shortSpec": "349cc, Redditch Red",
+      "variants": [
+        { "id": "v-re350-redditch", "label": "Redditch Red", "price": 193000, "inStock": true },
+        { "id": "v-re350-chrome", "label": "Chrome Black", "price": 212000, "inStock": true }
+      ]
+    },
+    {
+      "id": "p-honda-activa",
+      "categoryId": "two-wheelers",
+      "name": "Activa 6G",
+      "brand": "Honda",
+      "icon": "bicycle-outline",
+      "description": "109.51cc air-cooled engine, Honda Eco Technology, and a 5-step adjustable rear suspension.",
+      "shortSpec": "110cc, Standard",
+      "variants": [
+        { "id": "v-activa-standard", "label": "Standard", "price": 80700, "inStock": true },
+        { "id": "v-activa-deluxe", "label": "Deluxe", "price": 87400, "inStock": true }
+      ]
+    },
+    {
+      "id": "p-swift",
+      "categoryId": "cars",
+      "name": "Swift",
+      "brand": "Maruti Suzuki",
+      "icon": "car-sport-outline",
+      "description": "1.2L Z-Series engine, 5-speed manual/AMT options, and Suzuki Connect telematics.",
+      "shortSpec": "1.2L, LXi",
+      "variants": [
+        { "id": "v-swift-lxi", "label": "LXi", "price": 649000, "inStock": true },
+        { "id": "v-swift-zxi", "label": "ZXi", "price": 749000, "inStock": true },
+        { "id": "v-swift-zxi-plus", "label": "ZXi+", "price": 849000, "inStock": false }
+      ]
+    },
+    {
+      "id": "p-creta",
+      "categoryId": "cars",
+      "name": "Creta",
+      "brand": "Hyundai",
+      "icon": "car-outline",
+      "description": "Feature-loaded midsize SUV with a panoramic sunroof, ADAS Level 2, and a digital cluster.",
+      "shortSpec": "1.5L, EX",
+      "variants": [
+        { "id": "v-creta-ex", "label": "EX", "price": 1109000, "inStock": true },
+        { "id": "v-creta-sx", "label": "SX", "price": 1349000, "inStock": true },
+        { "id": "v-creta-sxo", "label": "SX(O)", "price": 1599000, "inStock": true }
+      ]
+    }
+  ]
+}
