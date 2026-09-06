@@ -25,10 +25,6 @@ export function setSimulateFailure(endpoint: Endpoint, shouldFail: boolean) {
   else simulateFailureFor.delete(endpoint);
 }
 
-export function isSimulatingFailure(endpoint: Endpoint) {
-  return simulateFailureFor.has(endpoint);
-}
-
 function randomLatency() {
   return 400 + Math.random() * 400;
 }

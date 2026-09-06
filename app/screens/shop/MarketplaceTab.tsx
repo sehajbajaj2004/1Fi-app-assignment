@@ -1,26 +1,22 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import { ProductCard } from '../../components/shop';
 import { EmptyState, Skeleton } from '../../components/ui';
 import { setSimulateFailure } from '../../data/api/marketplaceApi';
-import { useProducts } from '../../data/hooks';
+import { useCategories, useProducts } from '../../data/hooks';
 import { colors, spacing, typography } from '../../theme';
-import type { Product } from '../../types/marketplace';
+import type { Category, Product } from '../../types/marketplace';
 import type { ShopStackParamList } from '../../navigation/ShopStackNavigator';
 
-const CATEGORY_ORDER = [
-  { id: 'mobiles-laptops', name: 'Mobiles & Laptops' },
-  { id: 'two-wheelers', name: 'Two-Wheelers' },
-  { id: 'cars', name: 'Cars' },
-];
-
-function groupByCategory(products: Product[]) {
-  return CATEGORY_ORDER.map((category) => ({
-    category,
-    products: products.filter((p) => p.categoryId === category.id),
-  })).filter((group) => group.products.length > 0);
+function groupByCategory(categories: Category[], products: Product[]) {
+  return categories
+    .map((category) => ({
+      category,
+      products: products.filter((p) => p.categoryId === category.id),
+    }))
+    .filter((group) => group.products.length > 0);
 }
 
 function SkeletonCard() {
@@ -44,6 +40,12 @@ function SkeletonCard() {
  */
 export function MarketplaceTab() {
   const { data, isLoading, isError, error, refetch, isRefetching } = useProducts();
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    isError: isCategoriesError,
+    refetch: refetchCategories,
+  } = useCategories();
   const navigation = useNavigation<NativeStackNavigationProp<ShopStackParamList>>();
 
   // Dev-only control so error states are easy to trigger for QA — never shown
@@ -55,9 +57,10 @@ export function MarketplaceTab() {
     setSimulateErrorState(value);
     setSimulateFailure('getProducts', value);
     refetch();
+    refetchCategories();
   };
 
-  if (isLoading) {
+  if (isLoading || isLoadingCategories) {
     return (
       <View style={styles.container}>
         {[1, 2, 3, 4].map((i) => (
@@ -67,7 +70,7 @@ export function MarketplaceTab() {
     );
   }
 
-  if (isError) {
+  if (isError || isCategoriesError) {
     return (
       <View style={styles.container}>
         <EmptyState
@@ -75,7 +78,10 @@ export function MarketplaceTab() {
           title="Couldn't load products"
           subtitle={error instanceof Error ? error.message : 'Something went wrong. Please try again.'}
           retryLabel="Retry"
-          onRetry={() => refetch()}
+          onRetry={() => {
+            refetch();
+            refetchCategories();
+          }}
         />
         {__DEV__ && (
           <DevSimulateErrorToggle value={simulateError} onChange={toggleSimulateError} />
@@ -84,7 +90,7 @@ export function MarketplaceTab() {
     );
   }
 
-  const groups = groupByCategory(data ?? []);
+  const groups = groupByCategory(categories ?? [], data ?? []);
 
   if (groups.length === 0) {
     return (

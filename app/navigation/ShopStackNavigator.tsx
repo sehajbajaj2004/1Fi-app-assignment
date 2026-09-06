@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
 import { colors } from '../theme';
 import { OrderConfirmationScreen } from '../screens/shop/OrderConfirmationScreen';
 import { ProductDetailScreen } from '../screens/shop/ProductDetailScreen';

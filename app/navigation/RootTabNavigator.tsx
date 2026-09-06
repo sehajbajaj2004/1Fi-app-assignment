@@ -1,7 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { EmiDuesScreen } from '../screens/stubs/EmiDuesScreen';
 import { HomeScreen } from '../screens/stubs/HomeScreen';

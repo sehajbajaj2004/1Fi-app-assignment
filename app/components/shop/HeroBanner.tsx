@@ -1,4 +1,3 @@
-import React from 'react';
 import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 
 // Provided asset: the "Shop today, Pay later using Mutual funds." banner from the

@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Badge, EmptyState, PrimaryButton, Skeleton } from '../../components/ui';
 import { useEmiPlans, useProductDetail } from '../../data/hooks';

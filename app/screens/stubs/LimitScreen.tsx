@@ -1,4 +1,3 @@
-import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { EmptyState } from '../../components/ui';
 import { colors, spacing } from '../../theme';

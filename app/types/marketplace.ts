@@ -38,7 +38,3 @@ export type EMIPlan = {
   /** Total interest baked into totalPayable, for display in the summary strip. */
   interestAmount: number;
 };
-
-export type ApiError = {
-  message: string;
-};
