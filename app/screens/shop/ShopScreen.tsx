@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { HeroBanner } from '../../components/shop/HeroBanner';
 import { SearchBar, SegmentedTabs } from '../../components/ui';
 import { colors, spacing } from '../../theme';
@@ -21,14 +21,19 @@ const SEARCH_PLACEHOLDER: Record<TabKey, string> = {
   marketplace: 'Search products…',
 };
 
-/** Hosts the hero banner, 3-way segmented switcher and shared search bar for the Shop tab. */
+/**
+ * Hosts the hero banner, 3-way segmented switcher and shared search bar for the
+ * Shop tab. The whole screen is one ScrollView — the hero banner alone can be
+ * taller than the viewport on short/wide layouts (e.g. resized desktop web),
+ * so tab content must never be trapped in unreachable space below it.
+ */
 export function ShopScreen() {
   // Defaults to the Marketplace tab — the actual built deliverable — rather than
   // mirroring the real app's default, so it's immediately visible on launch.
   const [activeTab, setActiveTab] = useState<TabKey>('marketplace');
 
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen} contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
       <HeroBanner />
       <View style={styles.chrome}>
         <SegmentedTabs tabs={[...TABS]} activeKey={activeTab} onChange={(key) => setActiveTab(key as TabKey)} />
@@ -41,7 +46,7 @@ export function ShopScreen() {
         {activeTab === 'nearbyStores' && <NearbyStoresTab />}
         {activeTab === 'marketplace' && <MarketplaceTab />}
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -49,6 +54,9 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  scrollContent: {
+    flexGrow: 1,
   },
   chrome: {
     paddingHorizontal: spacing.md,

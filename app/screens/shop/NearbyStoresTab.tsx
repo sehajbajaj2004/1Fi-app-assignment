@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { EmptyState } from '../../components/ui';
 import { colors, radius, spacing, typography } from '../../theme';
 
@@ -8,10 +8,11 @@ import { colors, radius, spacing, typography } from '../../theme';
  * Stub tab per the assignment scope — intentionally blank, no real store/location
  * data. The shared SearchBar lives in ShopScreen (placeholder text changes per
  * tab); this component only owns its heading + location chip + empty state.
+ * Renders as a plain View — ShopScreen is the single scrollable container.
  */
 export function NearbyStoresTab() {
   return (
-    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+    <View style={styles.container}>
       <View style={styles.headingRow}>
         <Text style={styles.heading}>Nearby Stores</Text>
         <View style={styles.locationChip}>
@@ -24,7 +25,7 @@ export function NearbyStoresTab() {
         title="Coming soon"
         subtitle="Nearby Stores isn't part of this build — the 1Fi Marketplace tab is the full experience."
       />
-    </ScrollView>
+    </View>
   );
 }
 

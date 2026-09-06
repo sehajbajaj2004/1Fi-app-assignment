@@ -59,6 +59,26 @@ export async function getProductById(id: string): Promise<Product> {
   });
 }
 
+/**
+ * Pure EMI math shared by the async endpoint below and by ProductCard's
+ * synchronous "EMI from ₹X/mo" teaser — one source of truth for the interest
+ * formula, no network/latency involved since it's a plain derivation from a
+ * price that was itself fetched through the hooks.
+ */
+export function computeEmiPlans(price: number): EMIPlan[] {
+  return tenureTemplates.map((template) => {
+    const totalPayable = Math.round(price * (1 + (template.interestRatePercent / 100) * (template.tenureMonths / 12)));
+    const interestAmount = totalPayable - price;
+    return {
+      tenureMonths: template.tenureMonths,
+      monthlyAmount: Math.round(totalPayable / template.tenureMonths),
+      totalPayable,
+      interestAmount,
+      noCostEmi: template.noCostEmi,
+    } satisfies EMIPlan;
+  });
+}
+
 export async function getEmiPlans(productId: string, variantId: string): Promise<EMIPlan[]> {
   return withLatency('getEmiPlans', () => {
     const product = products.find((p) => p.id === productId);
@@ -66,16 +86,6 @@ export async function getEmiPlans(productId: string, variantId: string): Promise
     if (!product || !variant) {
       throw new Error(`Variant "${variantId}" not found on product "${productId}".`);
     }
-    return tenureTemplates.map((template) => {
-      const totalPayable = Math.round(variant.price * (1 + (template.interestRatePercent / 100) * (template.tenureMonths / 12)));
-      const interestAmount = totalPayable - variant.price;
-      return {
-        tenureMonths: template.tenureMonths,
-        monthlyAmount: Math.round(totalPayable / template.tenureMonths),
-        totalPayable,
-        interestAmount,
-        noCostEmi: template.noCostEmi,
-      } satisfies EMIPlan;
-    });
+    return computeEmiPlans(variant.price);
   });
 }

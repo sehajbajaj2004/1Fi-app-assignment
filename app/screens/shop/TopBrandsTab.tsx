@@ -1,23 +1,24 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { EmptyState } from '../../components/ui';
 import { colors, spacing, typography } from '../../theme';
 
 /**
  * Stub tab per the assignment scope — intentionally blank, no real data/search
  * logic. The shared SearchBar lives in ShopScreen (placeholder text changes per
- * tab); this component only owns its heading + empty state.
+ * tab); this component only owns its heading + empty state. Renders as a plain
+ * View — ShopScreen is the single scrollable container for the whole page.
  */
 export function TopBrandsTab() {
   return (
-    <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+    <View style={styles.container}>
       <Text style={styles.heading}>Top Brands</Text>
       <EmptyState
         icon="storefront-outline"
         title="Coming soon"
         subtitle="Top Brands isn't part of this build — the 1Fi Marketplace tab is the full experience."
       />
-    </ScrollView>
+    </View>
   );
 }
 

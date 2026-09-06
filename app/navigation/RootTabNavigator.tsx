@@ -1,5 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { EmiDuesScreen } from '../screens/stubs/EmiDuesScreen';
@@ -60,7 +61,21 @@ export function RootTabNavigator() {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Shop" component={ShopStackNavigator} />
+      <Tab.Screen
+        name="Shop"
+        component={ShopStackNavigator}
+        options={({ route }) => {
+          // Hide the bottom tab bar on ProductDetail so it doesn't compete with
+          // the sticky CTA bar (Phase 4) — standard "focused product" pattern.
+          const focusedRoute = getFocusedRouteNameFromRoute(route) ?? 'Shop';
+          return {
+            tabBarStyle:
+              focusedRoute === 'ProductDetail'
+                ? { display: 'none' }
+                : { borderTopColor: colors.border, height: 60, paddingBottom: 6, paddingTop: 6 },
+          };
+        }}
+      />
       <Tab.Screen name="EmiDues" component={EmiDuesScreen} />
       <Tab.Screen name="Limit" component={LimitScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
