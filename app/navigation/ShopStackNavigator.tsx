@@ -6,7 +6,10 @@ import { ProductDetailScreen } from '../screens/shop/ProductDetailScreen';
 import { ShopScreen } from '../screens/shop/ShopScreen';
 
 export type ShopStackParamList = {
-  Shop: undefined;
+  // Named ShopHome (not "Shop") to avoid colliding with the parent Tab.Screen's
+  // "Shop" route name — React Navigation warns about two nested routes sharing
+  // a name, since it makes navigate("Shop", ...) ambiguous between them.
+  ShopHome: undefined;
   ProductDetail: { productId: string };
   /** Re-derives the chosen plan via useEmiPlans rather than passing the whole
    * EMIPlan object through navigation params — keeps a single source of truth
@@ -23,11 +26,11 @@ const headerOptions = {
   headerShadowVisible: false,
 };
 
-/** Internal stack for the Shop tab: Shop → ProductDetail → OrderConfirmation. */
+/** Internal stack for the Shop tab: ShopHome → ProductDetail → OrderConfirmation. */
 export function ShopStackNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Shop" component={ShopScreen} />
+      <Stack.Screen name="ShopHome" component={ShopScreen} options={{ title: 'Shop' }} />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
