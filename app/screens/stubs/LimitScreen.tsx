@@ -1,6 +1,6 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { EmptyState } from '../../components/ui';
-import { colors, spacing } from '../../theme';
+import { colors, floatingTabBarClearance, spacing } from '../../theme';
 
 export function LimitScreen() {
   return (
@@ -16,5 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     justifyContent: 'center',
     padding: spacing.md,
+    // Clears the floating tab bar.
+    paddingBottom: spacing.md + floatingTabBarClearance,
   },
 });

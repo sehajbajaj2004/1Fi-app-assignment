@@ -2,11 +2,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EmiDuesScreen } from '../screens/stubs/EmiDuesScreen';
 import { HomeScreen } from '../screens/stubs/HomeScreen';
 import { LimitScreen } from '../screens/stubs/LimitScreen';
 import { ProfileScreen } from '../screens/stubs/ProfileScreen';
-import { colors } from '../theme';
+import { colors, radius, spacing } from '../theme';
 import { ShopStackNavigator } from './ShopStackNavigator';
 
 export type RootTabParamList = {
@@ -36,11 +37,37 @@ const LABELS: Record<keyof RootTabParamList, string> = {
 };
 
 /**
- * 5-item bottom tab bar matching the reference screenshot. Only Shop is
- * functional; the other four render simple disabled/placeholder screens.
- * App launches directly into Shop (initialRouteName).
+ * 5-item bottom tab bar matching the reference screenshot, styled as a
+ * floating rounded pill inset from the screen edges (rather than a bar
+ * docked flush to the bottom). Only Shop is functional; the other four
+ * render simple disabled/placeholder screens. App launches directly into
+ * Shop (initialRouteName).
  */
 export function RootTabNavigator() {
+  const insets = useSafeAreaInsets();
+  // Clears the home indicator on iOS (and any bottom inset generally) with a
+  // consistent visual gap above it, rather than sitting flush on the edge.
+  const floatingBottom = Math.max(insets.bottom, spacing.sm) + spacing.sm;
+
+  const floatingTabBarStyle = {
+    position: 'absolute' as const,
+    left: spacing.md,
+    right: spacing.md,
+    bottom: floatingBottom,
+    height: 64,
+    borderRadius: radius.lg,
+    borderTopWidth: 0,
+    backgroundColor: colors.surface,
+    paddingTop: spacing.xs,
+    paddingBottom: spacing.xs,
+    // Shadow so the bar reads as floating above the content, not just inset.
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 8,
+  };
+
   return (
     <Tab.Navigator
       initialRouteName="Shop"
@@ -49,7 +76,7 @@ export function RootTabNavigator() {
         tabBarActiveTintColor: colors.accent,
         tabBarInactiveTintColor: colors.textMuted,
         tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
-        tabBarStyle: { borderTopColor: colors.border, height: 60, paddingBottom: 6, paddingTop: 6 },
+        tabBarStyle: floatingTabBarStyle,
         tabBarIcon: ({ focused, color, size }) => (
           <View style={styles.iconWrap}>
             {focused ? <View style={styles.indicator} /> : <View style={styles.indicatorPlaceholder} />}
@@ -69,9 +96,7 @@ export function RootTabNavigator() {
           const focusedRoute = getFocusedRouteNameFromRoute(route) ?? 'Shop';
           const hideTabBar = focusedRoute === 'ProductDetail' || focusedRoute === 'OrderConfirmation';
           return {
-            tabBarStyle: hideTabBar
-              ? { display: 'none' }
-              : { borderTopColor: colors.border, height: 60, paddingBottom: 6, paddingTop: 6 },
+            tabBarStyle: hideTabBar ? { display: 'none' } : floatingTabBarStyle,
           };
         }}
       />

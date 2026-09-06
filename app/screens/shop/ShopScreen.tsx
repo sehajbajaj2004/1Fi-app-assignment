@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { HeroBanner } from '../../components/shop/HeroBanner';
 import { SearchBar, SegmentedTabs } from '../../components/ui';
-import { colors, spacing } from '../../theme';
+import { colors, floatingTabBarClearance, spacing } from '../../theme';
 import { MarketplaceTab } from './MarketplaceTab';
 import { NearbyStoresTab } from './NearbyStoresTab';
 import { TopBrandsTab } from './TopBrandsTab';
@@ -67,5 +67,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    // Clears the floating tab bar so the last product card / empty state
+    // isn't hidden behind it.
+    paddingBottom: floatingTabBarClearance,
   },
 });
